@@ -1,6 +1,7 @@
 <script lang=ts>
     import {onMount} from 'svelte';
     import {sensors, simulation, alert_level} from "./state.svelte";
+    import Measure from './Measure';
 
 
     // simulates changing of the water level and flow when the simulation is active
@@ -10,6 +11,11 @@
             return
 
         else{
+            //pushing the current measure in the history, keeping only the ten last variations
+            simulation.history.pop();
+            simulation.history=[new Measure(sensors.water_level,sensors.water_flow,sensors.water_pressure,alert_level()),...simulation.history]
+
+
             let randomNumber=Math.random();
             //10% chance to have a big down of the water level
             if(randomNumber<0.1){
