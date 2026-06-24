@@ -1,11 +1,12 @@
 
 export let sensors =$state({
-    water_level: 3.2, // The value of the level is in meters
+    water_level: 3.0, // The value of the level is in meters
     water_pressure : 0.3, // The value of the water pressure is in bar
-    water_flow : 80 //the value of the water flow is in cubic meters
+    water_flow : 90 //the value of the water flow is in cubic meters
 });
 
 sensors.water_pressure=$derived(sensors.water_level*0.0981)
+
 export let simulation ={
     isOn:false,
     history : []
