@@ -2,18 +2,20 @@
     import {onMount} from 'svelte';
     import {water_flow,water_level,water_pressure, simulation,} from "./state.svelte";
     import Measure from './Measure';
+    import Sensor from './components/Sensor.svelte';
+    import GlobalState from './components/GlobalState.svelte';
 
     //recalculates the water_pressure value
     $effect(()=>{water_pressure.value=water_pressure.value*0.0981})
 
     //a function to calculate the gllbal alert level
     const global_alert_level = $derived(()=>{
-    if ((water_flow.alert_level)=="Danger !" || (water_level.alert_level)=="Danger !" || (water_pressure.alert_level)=="Danger !")
-        return 'Danger !';
-    else if ((water_flow.alert_level)=="Vigilance." || (water_level.alert_level)=="Vigilance." || (water_pressure.alert_level)=="Vigilance.")
-        return 'Vigilance.';
+    if ((water_flow.alert_level)=="danger" || (water_level.alert_level)=="danger" || (water_pressure.alert_level)=="danger")
+        return 'danger';
+    else if ((water_flow.alert_level)=="vigilance" || (water_level.alert_level)=="vigilance" || (water_pressure.alert_level)=="vigilance")
+        return 'vigilance';
     else
-        return 'Stable.';
+        return 'stable';
 })
 
     // simulates changing of the water level and flow when the simulation is active
@@ -60,8 +62,11 @@
 
 </script>
 
-<p>
-    Water level    : {water_level.value} meters 
-    Water flow     : {water_flow.value} cube meters per second
-    Water pressure : {water_pressure.value} bar
-</p>
+<div class="sensors">
+    <Sensor name="Water level" value={water_level.value} unit="meters" alert_level={water_level.alert_level} />
+    <Sensor name="Water pressure" value={water_pressure.value} unit="bar" alert_level={water_pressure.alert_level} />
+    <Sensor name="Water flow" value={water_flow.value} unit="cube meters per second" alert_level={water_flow.alert_level} />
+</div>
+<div class="global_state">
+    <GlobalState global_alert_level={global_alert_level()} />
+</div>
