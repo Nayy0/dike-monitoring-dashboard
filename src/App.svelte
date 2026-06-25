@@ -4,6 +4,7 @@
     import Measure from './Measure';
     import Sensor from './components/Sensor.svelte';
     import GlobalState from './components/GlobalState.svelte';
+    import History from './components/History.svelte';
 
     //recalculates the water_pressure value
     $effect(()=>{water_pressure.value=water_level.value*0.0981});
@@ -31,7 +32,8 @@
 
         else{
             //pushing the current measure in the history, keeping only the ten last variations
-            simulation.history.pop();
+            if(simulation.history.length==10)
+                simulation.history.pop();
             simulation.history=[new Measure(water_level.value,water_flow.value,water_pressure.value,global_alert_level()),...simulation.history]
 
 
@@ -59,14 +61,14 @@
 
     // start the simulation interval when the component is mounted
     onMount(()=>{
-        const simulation_interval= setInterval(values_simulation,2000);
+        const simulation_interval= setInterval(values_simulation,1500);
 
         return ()=>clearInterval(simulation_interval); //clear the interval when the component is destroyed
-    })
+    });
 
 
     //function that start or top the simulation
-    const onClick=(ev)=>{
+    const onClick=()=>{
         if(simulation.isOn)
             simulation.isOn=false;
         else
@@ -86,6 +88,9 @@
 </div>
 <div>
     <button onclick={onClick}>
-        {simulation.isOn ? "Pause ": "Start "}the simulation.
+        {simulation.isOn ? "Pause ": "Start "}the simulation
     </button>
+</div>
+<div>
+    <History simulation={simulation}/>
 </div>

@@ -34,14 +34,13 @@ export let simulation =$state({
 });
 
 export const evaluate_alert_level = (sensor : Sensor)=>{
-    if(sensor.value >= sensor.vigilance_level){
-        sensor.alert_level="vigilance";
-    }
-    else if(sensor.value >=sensor.danger_level){
+    if(sensor.value >=sensor.danger_level){
         sensor.alert_level="danger";
+    }
+    else if(sensor.value >= sensor.vigilance_level){
+        sensor.alert_level="vigilance";
     }
     else{
         sensor.alert_level="ok";
     }
-
 }
