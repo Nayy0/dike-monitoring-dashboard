@@ -1,57 +1,56 @@
 import Measure from "./Measure";
 
-export let sensors =$state({
-    water_level: 3.0, // The value of the level is in meters
-    water_pressure : 0.3, // The value of the water pressure is in bar
-    water_flow : 90 //the value of the water flow is in cubic meters
-});
-
-sensors.water_pressure=$derived(sensors.water_level*0.0981)
-
-
-
-export let simulation ={
-    isOn:false,
-    history : [] as Measure[] // an array to stock the last 10 measures
-};
-
 const dike_height= 11; // the value of the dike's height is in meters
 
-
-
-const evaluate_level = (water_level : number)=>{
-    if(water_level >= 8.5)
-        return "Vigilance.";
-    else if(water_level >=10.0)
-        return "Warning!";
-    else
-        return ""
+type Sensor ={
+    value : number,
+    vigilance_level : number,
+    danger_level : number,
+    alert_level : "" | "Vigilance." | "Danger !"
 }
 
-const evaluate_pressure = (water_pressure : number)=>{
-    if(water_pressure >= 0.85)
-        return "Vigilance.";
-    else if(water_pressure >=1.0)
-        return "Warning!";
-    else
-        return ""
+export let water_level : Sensor = {
+    value : $state(3.0), // The value of the level is in meters
+    vigilance_level : 8.5,
+    danger_level : 10,
+    alert_level : $state("")
+}
+export let water_pressure : Sensor = {
+    value : $derived(water_level.value*0.0981), // The value of the water pressure is in bar
+    vigilance_level : 0.85,
+    danger_level : 1.0,
+    alert_level : $state("")
+}
+export let water_flow : Sensor= {
+    value:$state(90), //the value of the water flow is in cubic meters
+    vigilance_level : 150,
+    danger_level : 300,
+    alert_level : $state("")
+}
+
+export let simulation =$state({
+    isOn:false,
+    history : [] as Measure[] // an array to stock the last 10 measures
+});
+
+const evaluate_alert_level = (sensor : Sensor)=>{
+    if(sensor.value >= sensor.vigilance_level){
+        sensor.alert_level="Vigilance.";
+    }
+    else if(sensor.value >=sensor.danger_level){
+        sensor.alert_level="Danger !";
+    }
+    else{
+        water_flow
+        sensor.alert_level="";
+    }
 
 }
 
-const evaluate_flow = (water_flow : number)=>{
-    if(water_flow >= 150)
-        return "Vigilance.";
-    else if(water_flow >=300)
-        return "Warning!";
-    else
-        return ""
-
-}
-
-export let alert_level = $derived(()=>{
-    if (evaluate_flow(sensors.water_flow)=="Warning!" || evaluate_level(sensors.water_level)=="Warning!" || evaluate_pressure(sensors.water_pressure)=="Warning!")
-        return 'Warning!';
-    else if (evaluate_flow(sensors.water_flow)=="Vigilance." || evaluate_level(sensors.water_level)=="Vigilance." || evaluate_pressure(sensors.water_pressure)=="Vigilance.")
+export let global_alert_level = $derived(()=>{
+    if ((water_flow.alert_level)=="Danger !" || (water_level.alert_level)=="Danger !" || (water_pressure.alert_level)=="Danger !")
+        return 'Danger !';
+    else if ((water_flow.alert_level)=="Vigilance." || (water_level.alert_level)=="Vigilance." || (water_pressure.alert_level)=="Vigilance.")
         return 'Vigilance.';
     else
         return 'Stable.';
