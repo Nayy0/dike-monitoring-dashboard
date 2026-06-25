@@ -1,8 +1,20 @@
 <script lang=ts>
     import {onMount} from 'svelte';
-    import {sensors, simulation, alert_level} from "./state.svelte";
+    import {water_flow,water_level,water_pressure, simulation,} from "./state.svelte";
     import Measure from './Measure';
 
+    //recalculates the water_pressure value
+    $effect(()=>{water_pressure.value=water_pressure.value*0.0981})
+
+    //a function to calculate the gllbal alert level
+    const global_alert_level = $derived(()=>{
+    if ((water_flow.alert_level)=="Danger !" || (water_level.alert_level)=="Danger !" || (water_pressure.alert_level)=="Danger !")
+        return 'Danger !';
+    else if ((water_flow.alert_level)=="Vigilance." || (water_level.alert_level)=="Vigilance." || (water_pressure.alert_level)=="Vigilance.")
+        return 'Vigilance.';
+    else
+        return 'Stable.';
+})
 
     // simulates changing of the water level and flow when the simulation is active
     const values_simulation=()=>{
@@ -13,26 +25,26 @@
         else{
             //pushing the current measure in the history, keeping only the ten last variations
             simulation.history.pop();
-            simulation.history=[new Measure(sensors.water_level,sensors.water_flow,sensors.water_pressure,alert_level()),...simulation.history]
+            simulation.history=[new Measure(water_level.value,water_flow.value,water_pressure.value,global_alert_level()),...simulation.history]
 
 
             let randomNumber=Math.random();
             //10% chance to have a big down of the water level
             if(randomNumber<0.1){
-                sensors.water_level >0.3 ? sensors.water_level-=0.3 : sensors.water_level+=0.1;
-                sensors.water_flow>9 ? sensors.water_flow-=9 : sensors.water_flow+=3;
+                water_level.value >0.3 ? water_level.value-=0.3 : water_level.value+=0.1;
+                water_flow.value>9 ? water_flow.value-=9 : water_flow.value+=3;
             }//30% chance to have a small down of the water level
             else if (randomNumber<0.4){
-                sensors.water_level >0.1 ? sensors.water_level-=0.1 : sensors.water_level+=0.1;
-                sensors.water_flow>3 ? sensors.water_flow-=3 : sensors.water_flow+=3;
+                water_level.value >0.1 ? water_level.value-=0.1 : water_level.value+=0.1;
+                water_flow.value>3 ? water_flow.value-=3 : water_flow.value+=3;
             }//40% chance to have a small up of the water level
             else if (randomNumber<0.8){
-                sensors.water_level >0.1 ? sensors.water_level+=0.1 : sensors.water_level-=0.1;
-                sensors.water_flow>3 ? sensors.water_flow+=3 : sensors.water_flow-=3;
+                water_level.value >0.1 ? water_level.value+=0.1 : water_level.value-=0.1;
+                water_flow.value>3 ? water_flow.value+=3 : water_flow.value-=3;
             }//20% chance to have a big up of the water level
             else{
-                sensors.water_level >0.3 ? sensors.water_level+=0.3 : sensors.water_level-=0.1;
-                sensors.water_flow>3 ? sensors.water_flow+=3 : sensors.water_flow-=3;
+                water_level.value >0.3 ? water_level.value+=0.3 : water_level.value-=0.1;
+                water_flow.value>3 ? water_flow.value+=3 : water_flow.value-=3;
             }
         }
 
@@ -47,3 +59,9 @@
 
 
 </script>
+
+<p>
+    Water level    : {water_level.value} meters 
+    Water flow     : {water_flow.value} cube meters per second
+    Water pressure : {water_pressure.value} bar
+</p>
