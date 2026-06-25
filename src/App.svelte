@@ -1,12 +1,17 @@
 <script lang=ts>
     import {onMount} from 'svelte';
-    import {water_flow,water_level,water_pressure, simulation,} from "./state.svelte";
+    import {water_flow,water_level,water_pressure, simulation, evaluate_alert_level,} from "./state.svelte";
     import Measure from './Measure';
     import Sensor from './components/Sensor.svelte';
     import GlobalState from './components/GlobalState.svelte';
 
     //recalculates the water_pressure value
-    $effect(()=>{water_pressure.value=water_pressure.value*0.0981})
+    $effect(()=>{water_pressure.value=water_level.value*0.0981});
+
+    //updates the sensors alert level
+    $effect(()=>evaluate_alert_level(water_level));
+    $effect(()=>evaluate_alert_level(water_flow));
+    $effect(()=>evaluate_alert_level(water_pressure));
 
     //a function to calculate the gllbal alert level
     const global_alert_level = $derived(()=>{
@@ -60,6 +65,15 @@
     })
 
 
+    //function that start or top the simulation
+    const onClick=(ev)=>{
+        if(simulation.isOn)
+            simulation.isOn=false;
+        else
+            simulation.isOn=true;
+    }
+
+
 </script>
 
 <div class="sensors">
@@ -69,4 +83,9 @@
 </div>
 <div class="global_state">
     <GlobalState global_alert_level={global_alert_level()} />
+</div>
+<div>
+    <button onclick={onClick}>
+        {simulation.isOn ? "Pause ": "Start "}the simulation.
+    </button>
 </div>
