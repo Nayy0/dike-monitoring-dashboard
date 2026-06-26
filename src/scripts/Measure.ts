@@ -4,7 +4,7 @@ export default class Measure{
     public values : [number] ;
     public alert_level:string;
 
-    constructor(sensors,alert_level:string){
+    constructor(sensors: any[],alert_level:string){
         this.time=new Date;
         this.alert_level=alert_level;
         this.values=[sensors[0].value];

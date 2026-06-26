@@ -7,7 +7,7 @@ export let simulation =$state({
     history : [] as Measure[] // an array to stock the last 10 measures
 });
 
-export const evaluate_alert_level = (sensor)=>{
+export const evaluate_alert_level = (sensor:any)=>{
     if(sensor.value >=sensor.danger_level){
         sensor.alert_level="danger";
     }

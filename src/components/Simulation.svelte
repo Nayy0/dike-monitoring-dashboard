@@ -2,8 +2,8 @@
     import Button from "./ButtonSimulation.svelte";
     import SimulationHistory from "./SimulationHistory.svelte";
 
-    let {onClickSimulation, simulation} = $props();
+    let {onClickSimulation, simulation, sensors} = $props();
 </script>
 
 <Button onClickSimulation={onClickSimulation} simulation={simulation}/>
-<SimulationHistory simulation={simulation} />
+<SimulationHistory simulation={simulation} sensors={sensors}/>

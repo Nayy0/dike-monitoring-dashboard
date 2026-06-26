@@ -94,7 +94,7 @@
     <GlobalState global_alert_level={global_alert_level()} />
 </div>
 <div>
-    <Simulation onClickSimulation={onClickSimulation} simulation={simulation}/>
+    <Simulation onClickSimulation={onClickSimulation} simulation={simulation} sensors={sensors}/>
 </div>
 <div>
     {#each sensors as sensor}

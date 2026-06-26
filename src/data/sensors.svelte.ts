@@ -6,6 +6,7 @@ const sensors=$state([
         vigilance_level : 8.5,
         danger_level : 10,
         unit : "meters",
+        unit_abrevation : "m",
         alert_level : "ok"
     },
     {
@@ -15,6 +16,7 @@ const sensors=$state([
         vigilance_level : 0.85,
         danger_level : 1.0,
         unit : "bar",
+        unit_abrevation : "bar",
         alert_level : "ok"
     },
     {
@@ -24,6 +26,7 @@ const sensors=$state([
         vigilance_level : 150,
         danger_level : 300,
         unit : "cube meters",
+        unit_abrevation : "m³/s",
         alert_level : "ok"
     }
 ]);

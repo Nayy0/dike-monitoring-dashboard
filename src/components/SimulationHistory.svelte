@@ -2,16 +2,16 @@
     import { each } from "chart.js/helpers";
   import Measure from "../Measure.js";
 
-  let {simulation} =$props();
+  let {simulation,sensors} =$props();
 </script>
 
 <table class='history'>
   <thead class='table_header'>
     <tr>
       <th>Time</th>
-      <th>Water Level (m)</th>
-      <th>Water Flow (m³/s)</th>
-      <th>Water Pressure (bar)</th>
+      {#each sensors as sensor}
+        <th>{sensor.name} ({sensor.unit_abrevation})</th>
+      {/each}
       <th>Alert Level</th>
     </tr>
   </thead>
