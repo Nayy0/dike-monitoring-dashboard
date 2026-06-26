@@ -1,10 +1,10 @@
 <script lang=ts>
     import {onMount} from 'svelte';
-    import {water_flow,water_level,water_pressure, simulation, evaluate_alert_level,} from "./state.svelte";
-    import Measure from './Measure';
-    import Sensor from './components/Sensor.svelte';
-    import GlobalState from './components/GlobalState.svelte';
-    import History from './components/History.svelte';
+    import {water_flow,water_level,water_pressure, simulation, evaluate_alert_level,} from "../state.svelte";
+    import Measure from '../Measure';
+    import Sensor from './Sensor.svelte';
+    import GlobalState from './GlobalState.svelte';
+    import Simulation from './Simulation.svelte';
 
     //recalculates the water_pressure value
     $effect(()=>{water_pressure.value=water_level.value*0.0981});
@@ -68,7 +68,7 @@
 
 
     //function that start or top the simulation
-    const onClick=()=>{
+    const onClickSimulation=()=>{
         if(simulation.isOn)
             simulation.isOn=false;
         else
@@ -87,10 +87,5 @@
     <GlobalState global_alert_level={global_alert_level()} />
 </div>
 <div>
-    <button onclick={onClick}>
-        {simulation.isOn ? "Pause ": "Start "}the simulation
-    </button>
-</div>
-<div>
-    <History simulation={simulation}/>
+    <Simulation onClickSimulation={onClickSimulation} simulation={simulation}/>
 </div>
