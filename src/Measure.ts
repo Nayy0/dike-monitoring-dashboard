@@ -1,16 +1,15 @@
 export default class Measure{
     
     public time: Date;
-    public water_level : number;
-    public water_flow: number;
-    public water_pressure : number;
+    public values : [number] ;
     public alert_level:string;
 
-    constructor(water_level:number,water_flow:number, water_pressure:number,alert_level:string){
+    constructor(sensors,alert_level:string){
         this.time=new Date;
-        this.water_level=water_level;
-        this.water_flow=water_flow;
-        this.water_pressure=water_pressure;
         this.alert_level=alert_level;
+        this.values=[sensors[0].value];
+        for (let i =1;i<sensors.length;i++){
+            this.values.push(sensors[i].value);
+        }
     }
 }

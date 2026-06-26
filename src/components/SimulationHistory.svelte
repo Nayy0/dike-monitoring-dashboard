@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { each } from "chart.js/helpers";
   import Measure from "../Measure.js";
 
   let {simulation} =$props();
@@ -15,12 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    {#each simulation.history as measure (measure.time)}
+    {#each simulation.history as measure }
       <tr>
         <td>{measure.time.toLocaleTimeString()}</td>
-        <td>{measure.water_level.toFixed(2)}</td>
-        <td>{measure.water_flow.toFixed(1)}</td>
-        <td>{measure.water_pressure.toFixed(3)}</td>
+        {#each measure.values as value}
+        <td>{value.toFixed(2)}</td>
+        {/each}
         <td>{measure.alert_level}</td>
       </tr>
     {/each}

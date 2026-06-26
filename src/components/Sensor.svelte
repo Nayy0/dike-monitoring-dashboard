@@ -1,8 +1,8 @@
 <script lang="ts">
-    let {name,value, unit, alert_level}=$props();
+    let {sensor}=$props();
 </script>
 <div class="capteur">
-  <h3>{name}</h3>
-  <p>{value.toFixed(2)} {unit}</p>
-  <p class="alert_level">Alert level : {alert_level}</p>
+  <h3>{sensor.name}</h3>
+  <p>{sensor.value.toFixed(2)} {sensor.unit}</p>
+  <p class="alert_level">Alert level : {sensor.alert_level}</p>
 </div>
