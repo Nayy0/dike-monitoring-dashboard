@@ -6,8 +6,3 @@
   Statut : {global_alert_level.toUpperCase()}
 </div>
 
-<style>
-  .stable    { background: green; color: white; }
-  .vigilance { background: orange; color: white; }
-  .danger    { background: red; color: white; }
-</style>

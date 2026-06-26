@@ -3,6 +3,9 @@
 </script>
 
 
-<button class='simulation_button' onclick={onClickSimulation}>
-        {simulation.isOn ? "Pause ": "Start "}the simulation
+<button
+  class="btn-simulation {simulation.isOn ? 'active' : ''}"
+  onclick={onClickSimulation}
+>
+  {simulation.isOn ? "Pause" : "Start"} simulation
 </button>

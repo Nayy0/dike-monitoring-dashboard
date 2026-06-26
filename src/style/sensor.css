@@ -1,0 +1,43 @@
+.sensor-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--panel-pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sensor-name {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.sensor-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--accent-blue);
+}
+
+.sensor-unit {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 0.25rem;
+}
+
+.sensor-badge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.sensor-badge.ok        { background: rgba(34,197,94,0.15);  color: var(--ok); }
+.sensor-badge.vigilance { background: rgba(245,158,11,0.15); color: var(--vigilance); }
+.sensor-badge.danger    { background: rgba(239,68,68,0.15);  color: var(--danger); }

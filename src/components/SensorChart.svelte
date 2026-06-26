@@ -118,19 +118,7 @@
 </script>
 
 <div class="chart-wrapper">
+  <p class="chart-title">{sensor.name}</p>
   <canvas bind:this={canvas}></canvas>
 </div>
 
-<style>
-  .chart-wrapper {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
-  }
-
-  canvas {
-    width: 100% !important;
-  }
-</style>

@@ -1,0 +1,41 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "charts  sensors  history"
+    "charts  status   controls";
+  gap: 0.75rem;
+  padding: 0.75rem;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.col-charts   {
+  grid-area: charts;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.col-sensors  {
+  grid-area: sensors;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.col-status   {
+  grid-area: status;
+  min-height: 160px;
+}
+
+.col-history  {
+  grid-area: history;
+  overflow-y: auto;
+}
+
+.col-controls {
+  grid-area: controls;
+}

@@ -5,5 +5,6 @@
     let {onClickSimulation, simulation, sensors} = $props();
 </script>
 
-<Button onClickSimulation={onClickSimulation} simulation={simulation}/>
-<SimulationHistory simulation={simulation} sensors={sensors}/>
+<div class="controls-wrapper">
+  <Button onClickSimulation={onClickSimulation} simulation={simulation} />
+</div>
