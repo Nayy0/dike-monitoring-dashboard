@@ -89,7 +89,7 @@
 <div class="dashboard">
   <div class="col-charts">
     {#each sensors as sensor}
-      <SensorChart sensor={sensor} simulation={simulation} sensors={sensors} />
+      <SensorChart sensor={sensor} simulation={simulation} />
     {/each}
   </div>
 

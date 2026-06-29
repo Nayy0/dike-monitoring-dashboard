@@ -13,7 +13,7 @@
 
   Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Annotation);
 
-  const { sensor, simulation } = $props<{ sensor: any; simulation: any }>();
+  let {sensor, simulation}=$props();
 
   let canvas: HTMLCanvasElement;
   let chart: Chart;
