@@ -43,7 +43,6 @@
 
 .history-wrapper tr:last-child td { border-bottom: none; }
 
-/* spécificité renforcée pour écraser la règle td générale */
-.history-wrapper tbody tr td.ok        { color: var(--ok) !important; }
-.history-wrapper tbody tr td.vigilance { color: var(--vigilance) !important; }
-.history-wrapper tbody tr td.danger    { color: var(--danger) !important; }
+.history-wrapper tbody tr td.ok        { color: white; background: green; }
+.history-wrapper tbody tr td.vigilance { color: white; background:orange; }
+.history-wrapper tbody tr td.danger    { color: white; background: red; }
