@@ -48,11 +48,11 @@
             let randomNumber=Math.random();
             //10% chance to have a big down of the water level
             if(randomNumber<0.1){
-                sensors[0].value >0.3 ? sensors[0].value+=0.3 : sensors[0].value+=0.1;
+                sensors[0].value >0.3 ? sensors[0].value-=0.3 : sensors[0].value+=0.1;
                 sensors[2].value>9 ? sensors[2].value-=9 : sensors[2].value+=3;
             }//30% chance to have a small down of the water level
             else if (randomNumber<0.4){
-                sensors[0].value >0.1 ? sensors[0].value+=0.1 : sensors[0].value+=0.1;
+                sensors[0].value >0.1 ? sensors[0].value-=0.1 : sensors[0].value+=0.1;
                 sensors[2].value>3 ? sensors[2].value-=3 : sensors[2].value+=3;
             }//40% chance to have a small up of the water level
             else if (randomNumber<0.8){
