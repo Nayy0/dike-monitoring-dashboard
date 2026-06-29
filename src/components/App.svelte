@@ -100,17 +100,10 @@
     {/each}
   </div>
 
-  <div class="col-history">
-    <SimulationHistory simulation={simulation} sensors={sensors} />
-  </div>
-
   <div class="col-status">
     <GlobalState global_alert_level={global_alert_level()} />
   </div>
 
-  <div class="col-controls">
-    <div class="controls-wrapper">
-      <ButtonSimulation onClickSimulation={onClickSimulation} simulation={simulation} />
-    </div>
-  </div>
+  <Simulation onClickSimulation={onClickSimulation} simulation={simulation} sensors={sensors} />
+
 </div>

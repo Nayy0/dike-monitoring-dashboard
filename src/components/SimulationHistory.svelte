@@ -1,7 +1,4 @@
 <script lang="ts">
-    import { each } from "chart.js/helpers";
-  import Measure from "../scripts/Measure.js";
-
   let {simulation,sensors} =$props();
 </script>
 
